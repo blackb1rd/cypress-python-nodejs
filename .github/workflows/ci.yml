@@ -44,9 +44,9 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:${GITHUB_REF/refs\/tags\//}
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:${{ github.ref_name }}
             ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}:${GITHUB_REF/refs\/tags\//}
+            ghcr.io/${{ github.repository }}:${{ github.ref_name }}
 
       - name: Image digest
         if: startsWith(github.ref, 'refs/tags/v')
