@@ -15,11 +15,6 @@ jobs:
       contents: read
       packages: write
     steps:
-      - name: Prepare for tag
-        if: startsWith(github.ref, 'refs/tags/v')
-        id: prep
-        run: |
-          echo "tags=s4m3l0/${{ github.repository }}:latest,s4m3l0/${{ github.repository }}:${GITHUB_REF/refs\/tags\//},ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:latest,ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
       - name: Checkout
         uses: actions/checkout@v4
       - name: Set up QEMU
@@ -47,7 +42,8 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ steps.prep.outputs.tags }}
+          tags: s4m3l0/${{ github.repository }}:latest,s4m3l0/${{ github.repository }}:${GITHUB_REF/refs\/tags\//},ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:latest,ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:${GITHUB_REF/refs\/tags\//}
+
       - name: Image digest
         if: startsWith(github.ref, 'refs/tags/v')
         run: echo ${{ steps.docker_build.outputs.digest }}
