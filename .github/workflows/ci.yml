@@ -43,8 +43,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            s4m3l0/${{ github.event.repository.name }}:latest
-            s4m3l0/${{ github.event.repository.name }}:${GITHUB_REF/refs\/tags\//}
+            "s4m3l0/${{ github.event.repository.name }}:latest"
+            "s4m3l0/${{ github.event.repository.name }}:${GITHUB_REF/refs\/tags\//}"
             ghcr.io/${{ github.repository }}:latest
             ghcr.io/${{ github.repository }}:${GITHUB_REF/refs\/tags\//}
 
